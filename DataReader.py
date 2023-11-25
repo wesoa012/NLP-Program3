@@ -30,7 +30,8 @@ def dataToCSVs():
         txt = open("./Data/txts/" + file, "r")
         
         for line in txt.readlines():
-            csv.write(line[0] + ',' + line[2:])
+            line = line.replace('"',"'")
+            csv.write(line[0] + ',"' + line[2:-1] + '"' + '\n')
     
 dataAdder()
 dataToCSVs()
