@@ -66,7 +66,7 @@ cd sentiment
 Now, try to run the `BERT` sentiment classifier using:
 
 ```sh
-python main.py
+python sentiment-net.py
 ```
 
 **NOTE: This command will either load the model weights if the model has been train before OR start training the model.**
@@ -105,13 +105,33 @@ enroot import -o ${HOME}/pytorch/pytorch.sqsh docker://pytorch/pytorch:latest
 
 **NOTE: The image will be downloaded and stored in the `pytorch` folder you created earlier. Fill free to store it anywhere else. Just make sure to update the path accordingly**
 
-### Acquire an interactive compute node on SuperPod
+### Clone the repository
 
-Using the following command, you will acquire a compute node with one GPU, and 4 CPU. The container will be interactive so you can have access to a terminal, and type command.
+In your `${HOME}` directory on SuperPod, clone this repository using:
 
 ```sh
-srun -N1 -G1 -c4 --mem=100G --container-remap-root --no-container-entrypoint --container-image ${HOME}/pytorch/pytorch.sqsh --container-mounts="${HOME}"/bert-fine-tuning:/workdir --container-workdir /workdir --pty bash -i
+git clone https://github.com/wesoa012/NLP-Program3.git
 ```
+
+and enter it using:
+
+```sh
+cd NLP-Program3
+```
+
+### Acquire an interactive compute node on SuperPod
+
+Now that you're at the root of the repository, use the following command to acquire a compute node with one GPU, and 4 CPU on SuperPod. The container will be interactive so you can type commands.
+
+```sh
+srun -N1 -G1 -c4 --mem=100G --container-remap-root --no-container-entrypoint --container-image ${HOME}/pytorch/pytorch.sqsh --container-mounts="${HOME}"/NLP-Program3/bert-fine-tuning:/workdir --container-workdir /workdir --pty bash -i
+```
+
+This command mounts the **`"${HOME}"/NLP-Program3/bert-fine-tuning`** folder on SuperPod to the **`/workdir`** folder in the container, and the `--container-workdir` flag on the command sets your working directory to be `workdir`.
+
+*NOTE: If the `srun` command returns an error, once again check your paths, and make sure everything is installed at the expected location.*
+
+*NOTE: Since SuperPod is allocated based on resource availability, you may or may not have a hard time acquiring a compute node. It will depend on how busy the system is when you try.*
 
 ### Install the dependencies
 
@@ -134,6 +154,12 @@ Let's use this section to describe the three datasets we did use, let's give the
 ## How to perform inference?
 
 (Kassi)
+
+First enter the `WSD` folder, inside the `bert-fine-tuning` folder using:
+
+```sh
+cd bert-fine-tuning/WSD/
+```
 
 ## Performance metrics
 
