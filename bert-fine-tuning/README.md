@@ -40,6 +40,12 @@ Now that you're at the root of the repository, use the following command to acqu
 srun -N1 -G1 -c4 --mem=100G --container-remap-root --no-container-entrypoint --container-image ${HOME}/pytorch/pytorch.sqsh --container-mounts="${HOME}"/NLP-Program3/bert-fine-tuning:/workdir --container-workdir /workdir --pty bash -i
 ```
 
+This command mounts the **`"${HOME}"/NLP-Program3/bert-fine-tuning`** folder on SuperPod to the **`/workdir`** folder in the container, and the `--container-workdir` flag on the command sets your working directory to be `workdir`.
+
+*NOTE: If the `srun` command returns an error, once again check your paths, and make sure everything is installed at the expected location.*
+
+*NOTE: Since SuperPod is allocated based on resource availability, you may or may not have a hard time acquiring a compute node. It will depend on how busy the system is when you try.*
+
 ### Now setup the environment.
 
 Assuming you acquired a compute node on superpod running pytorch images, you can setup the environment using the following the `env-setup.sh` script using:
