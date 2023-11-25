@@ -4,7 +4,7 @@
 
 ### Acquire a Pytorch image
 
-In `${HOME}` directory on SuperPod, create a `pytorch` directory using:
+In your `${HOME}` directory on SuperPod, create a `pytorch` directory using:
 
 ```sh
 mkdir pytorch
@@ -18,12 +18,26 @@ enroot import -o ${HOME}/pytorch/pytorch.sqsh docker://pytorch/pytorch:latest
 
 **NOTE: The image will be downloaded and stored in the `pytorch` folder you created earlier. Fill free to store it anywhere else. Just make sure to update the path accordingly**
 
-### Acquire an interactive compute node on SuperPod
+### Clone the repository
 
-Using the following command, will acquire a compute node with one GPU, and 4 CPU. The container will be interactive so you can type commands.
+In your `${HOME}` directory on SuperPod, clone this repository using:
 
 ```sh
-srun -N1 -G1 -c4 --mem=100G --container-remap-root --no-container-entrypoint --container-image ${HOME}/pytorch/pytorch.sqsh --container-mounts="${HOME}"/bert-fine-tuning:/workdir --container-workdir /workdir --pty bash -i
+git clone https://github.com/wesoa012/NLP-Program3.git
+```
+
+and enter it using:
+
+```sh
+cd NLP-Program3
+```
+
+### Acquire an interactive compute node on SuperPod
+
+Now that you're at the root of the repository, use the following command to acquire a compute node with one GPU, and 4 CPU on SuperPod. The container will be interactive so you can type commands.
+
+```sh
+srun -N1 -G1 -c4 --mem=100G --container-remap-root --no-container-entrypoint --container-image ${HOME}/pytorch/pytorch.sqsh --container-mounts="${HOME}"/NLP-Program3/bert-fine-tuning:/workdir --container-workdir /workdir --pty bash -i
 ```
 
 ### Now setup the environment.
