@@ -33,15 +33,15 @@ if __name__ == '__main__':
 
         df = pd.read_csv('/workdir/Data/csvs/Conviction.csv', header=None, names=['sense','sentence'])
 
-        # Split the dataset into Train/Valid/Test sets
-        train_sentences = df.iloc[:8000]['sentence'].values 
-        train_labels = df.iloc[:8000]['sense'].values
+        # Splitting the dataset into training (80%) and the rest (20%)
+        train_sentences, rest_sentences, train_labels, rest_labels = train_test_split(
+            df['sentence'].values, df['sense'].values, test_size=0.2, stratify=df['sense'].values
+        )
 
-        valid_sentences = df.iloc[8000:9000]['sentence'].values 
-        valid_labels = df.iloc[8000:9000]['sense'].values
-
-        test_sentences = df.iloc[9000:10000]['sentence'].values
-        test_labels = df.iloc[9000:10000]['sense'].values
+        # Splitting the remaining 20% half
+        valid_sentences, test_sentences, valid_labels, test_labels = train_test_split(
+            rest_sentences, rest_labels, test_size=1/2, stratify=rest_labels
+        )
 
         # Tokenizing each split of the dataset
         train_encodings = TOKENIZER(list(train_sentences), truncation=True, padding=True)
