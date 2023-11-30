@@ -6,3 +6,4 @@ torchtext
 pandas
 requests
 diffusers
+scikit-learn
