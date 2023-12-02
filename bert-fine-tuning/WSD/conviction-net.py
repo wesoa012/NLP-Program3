@@ -1,7 +1,10 @@
 import os
+import sys
 import pandas as pd
 import torch
 import torch.nn.functional as F
+
+from sklearn.model_selection import train_test_split
 
 from transformers import DistilBertTokenizerFast
 from WSDDataset import WSDDataset
@@ -28,17 +31,17 @@ if __name__ == '__main__':
     else:
         print("No saved model found. Training...")
 
-        df = pd.read_csv('conviction.csv')
+        df = pd.read_csv('/workdir/Data/csvs/Conviction.csv', header=None, names=['sense','sentence'])
 
-        # Split the dataset into Train/Valid/Test sets
-        train_sentences = df.iloc[:35000]['sentence'].values #35000 sentences
-        train_labels = df.iloc[:35000]['sense'].values
+        # Splitting the dataset into training (80%) and the rest (20%)
+        train_sentences, rest_sentences, train_labels, rest_labels = train_test_split(
+            df['sentence'].values, df['sense'].values, test_size=0.2, stratify=df['sense'].values
+        )
 
-        valid_sentences = df.iloc[35000:40000]['sentence'].values # 5000 sentences
-        valid_labels = df.iloc[35000:40000]['sense'].values
-
-        test_sentences = df.iloc[40000:]['sentence'].values # 10,000 sentences
-        test_labels = df.iloc[40000:]['sense'].values
+        # Splitting the remaining 20% half
+        valid_sentences, test_sentences, valid_labels, test_labels = train_test_split(
+            rest_sentences, rest_labels, test_size=1/2, stratify=rest_labels
+        )
 
         # Tokenizing each split of the dataset
         train_encodings = TOKENIZER(list(train_sentences), truncation=True, padding=True)
@@ -52,9 +55,9 @@ if __name__ == '__main__':
 
         # Create the dataloaders. 
         # Dataloaders create iteratable objects out of the dataset objects so we can iterate on the datasets using for loops.
-        train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=16, shuffle=True)
-        valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=16, shuffle=False)
-        test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=16, shuffle=False)
+        train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=8, shuffle=True)
+        valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=8, shuffle=False)
+        test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=8, shuffle=False)
 
         # Fine tuning the model
         model = WSDClassifier()
