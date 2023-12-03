@@ -65,7 +65,7 @@ if __name__ == '__main__':
         model.save_model(model_path)
 
     # With the model loaded, let's perform inference
-    inference_texts = pd.read_csv('inference_data.txt', header=None, names=['sentences'])
+    inference_texts = pd.read_csv('/workdir/Data/test/inference_conviction.txt', header=None, names=['sentences'])
     encodings = TOKENIZER(list(inference_texts['sentences']), truncation=True, padding=True)
 
     with torch.no_grad():
