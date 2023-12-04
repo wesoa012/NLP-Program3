@@ -43,7 +43,7 @@ cd NLP-Program3
 Now that you're at the root of the `NLP-Program3` repository, use the following command to acquire a compute node with one GPU, and 4 CPU on SuperPod. The container will be interactive so you can type commands.
 
 ```sh
-srun -N1 -G1 -c4 --mem=100G --container-remap-root --no-container-entrypoint --container-image ${HOME}/pytorch/pytorch.sqsh --container-mounts="${HOME}"/NLP-Program3/bert_fine_tuning:/workdir --container-workdir /workdir --pty bash -i
+srun -N1 -G1 -c4 --mem=100G --container-remap-root --no-container-entrypoint --container-image ${HOME}/pytorch/pytorch.sqsh --container-mounts="${HOME}"/NLP-Program3:/workdir --container-workdir /workdir --pty bash -i
 ```
 
 This command mounts the **`"${HOME}"/NLP-Program3/bert-fine-tuning`** folder on SuperPod to the **`/workdir`** folder in the container, and the `--container-workdir` flag on the command sets your working directory to be `workdir`.
@@ -75,10 +75,10 @@ The benefit of this approach was that we did not have to write three different n
 if you enter the `WSD` folder, inside the `bert-fine-tuning` folder using:
 
 ```sh
-cd bert-fine-tuning/WSD/
+cd bert_fine_tuning/WSD/
 ```
 
-Inside the `bert-fine-tuning/WSD/` folder, a quick `ls` command reveals the following files:
+Inside the `bert_fine_tuning/WSD/` folder, a quick `ls` command reveals the following files:
 
 ```txt
 -rw-rw-r-- 1 knzalasse knzalasse 3458 Dec  2 18:15 conviction-net.py
@@ -113,7 +113,7 @@ python rubbish-net.py
 To train the BERT for the `thorn` word, run:
 
 ```sh
-python thorn-net
+python thorn-net.py
 ```
 
 Each of these command should take about 5min to train the network.
