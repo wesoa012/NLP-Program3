@@ -57,6 +57,10 @@ This command mounts the **`"${HOME}"/NLP-Program3/bert-fine-tuning`** folder on 
 Inside your shiny new compute node, use the following command to install all the dependencies needed to run the program:
 
 ```sh
+cd bert_fine_tuning/
+```
+
+```sh
 ./env-setup.sh
 ```
 
@@ -75,7 +79,7 @@ The benefit of this approach was that we did not have to write three different n
 if you enter the `WSD` folder, inside the `bert-fine-tuning` folder using:
 
 ```sh
-cd bert_fine_tuning/WSD/
+cd WSD/
 ```
 
 Inside the `bert_fine_tuning/WSD/` folder, a quick `ls` command reveals the following files:
