@@ -4,9 +4,7 @@
 
 ## The Task
 
-(Wes or Kassi or both)
-
-Let's use this section to describe the task, the problem we are set to solve, and in one sentence or two, state our approach, which consisted in using BERT. But stated nicely.
+The problem we tackled in this program is to classify a word in different contexts as either sense 1 or sense 2. We built a separate classifier for each of the words: thorn, rubbish, and conviction. We describe in more detail below exactly how we trained these classifiers as well as their performance.
 
 ## Setting up the environment
 
@@ -65,12 +63,13 @@ Inside your shiny new compute node, use the following command to install all the
 
 ## The Dataset
 
-(Wes)
-Let's use this section to describe the three datasets we did use, let's give the specs, also let's describe How we augmented it, how we curated it, and add any other relevant information that pertains to the dataset
+Since BERT works better with larger datasets we beefed up our training data with synthetically generated sentences from ChatGPT. We wanted a large dataset that would still train in under 5 minutes on Superpod, so we chose to have 5000 newly generated sentences for each sense of the word in addition to the sentences already provided. For some of these sentences that ChatGPT generated it did not use the exact word "conviction" or "thorn" but instead used "convicted criminal" and "thorny path." At first, we were going to prune these data points from the dataset, but when we thought about it from the computer's perspective these examples should help increase the word sense that the computer has of "conviction" and "thorn." When we left these words in it did not affect the performance of the classifier negatively.
+
+The put-together dataset we used is located in the "Data" folder under csvs because when reading in the data we took advantage of the pandas library to easily put csv files into dataframe objects. The other folders in the "Data" folder contain the disjointed dataset that the "DataReader.py" can put together.
 
 ## How did we train the models?
 
-(Kassi or Wes)
+To train the model we took the 10000 sentences generated from ChatGPT as well as the ~50 sentences from the provided sentences and broke it into 3 chunks: training data, validation data, and testing data. The split was 80% for training, 10% for validation, and 10% for testing. After splitting the dataset into these three separate chunks we ran the training data through BERT to train and edit the weights of the underlying neural network. This network then verified it was being trained properly by predicting on the validation. This prediction is stored and output to determine the quality of the model. After 3 iterations of training and validating the classifier is finished and we send it the testing data that it has never seen before so that it can predict. After it has predicted on the test data we get an output to see exactly how accurate it was on data it has never seen before. Once that process is completed for each classifier then our training process is officially over.
 
 ## How to perform inference?
 
