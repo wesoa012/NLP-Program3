@@ -114,7 +114,7 @@ print(f"num sense2s = {len(transformed_sense2_x)}")
 
 plt.legend(loc = 'best')
 
-plt.savefig('Sentence_Embeddings_Thorn.png')
+plt.savefig('./Graphs/Sentence_Embeddings_Thorn.png')
 
 transformed_sense1_x, transformed_sense1_y = [],[]
 for i in sense1_what_we_care_abouts:
@@ -148,7 +148,7 @@ print(f"num sense2s = {len(transformed_sense2_x)}")
 
 plt.legend(loc = 'best')
 
-plt.savefig('Sentence_Embeddings_Flipped_Thorn.png')
+plt.savefig('./Graphs/Sentence_Embeddings_Flipped_Thorn.png')
 
 cos_sims_sense1_only, cos_sims_sense2_only, cos_sims_both = [],[],[]
 do_sense1_only, do_sense2_only, do_both_senses = True,True,True
@@ -239,20 +239,20 @@ cos_sims_sense1_only_df['Similarity Values'].plot(kind='kde')
 ax.set_title(f'Sense 1 Only Similarity Distributions',fontsize=20)
 ax.set_xlabel('Similarity Value',fontsize=15)
 ax.set_ylabel('Density',fontsize=15)
-plt.savefig('Thorn_Sense1_Only_SimVals.png')
+plt.savefig('./Graphs/Thorn_Sense1_Only_SimVals.png')
 
 fig, ax = plt.subplots(figsize=(12,7))
 cos_sims_sense2_only_df['Similarity Values'].plot(kind='kde')
 ax.set_title(f'Sense 2 Only Similarity Distributions',fontsize=20)
 ax.set_xlabel('Similarity Value',fontsize=15)
 ax.set_ylabel('Density',fontsize=15)
-plt.savefig('Thorn_Sense2_Only_SimVals.png')
+plt.savefig('./Graphs/Thorn_Sense2_Only_SimVals.png')
 
 fig, ax = plt.subplots(figsize=(12,7))
 cos_sims_both_df['Similarity Values'].plot(kind='kde')
 ax.set_title(f'Both Senses Similarity Distributions',fontsize=20)
 ax.set_xlabel('Similarity Value',fontsize=15)
 ax.set_ylabel('Density',fontsize=15)
-plt.savefig('Thorn_Both_Senses_SimVals.png')
+plt.savefig('./Graphs/Thorn_Both_Senses_SimVals.png')
 
 
