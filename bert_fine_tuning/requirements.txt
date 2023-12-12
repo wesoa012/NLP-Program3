@@ -7,3 +7,5 @@ pandas
 requests
 diffusers
 scikit-learn
+matplotlib
+PCA

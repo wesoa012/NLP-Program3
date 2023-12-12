@@ -6,7 +6,7 @@ import time
 class WSDClassifier(nn.Module):
     def __init__(self):
         super(WSDClassifier, self).__init__()
-        self.model = DistilBertForSequenceClassification.from_pretrained('distilbert-base-uncased')
+        self.model = DistilBertForSequenceClassification.from_pretrained('distilbert-base-uncased', output_hidden_states = True)
 
     def save_model(self, path):
         torch.save(self.model.state_dict(), path)
@@ -70,10 +70,10 @@ class WSDClassifier(nn.Module):
         print(f'Total Training Time: {(time.time() - start_time) / 60:.2f} min')
         print(f'Test accuracy: {self.compute_accuracy(test_loader, device):.2f}%')
 
-if __name__ == '__main__':
-    # Example Usage - Just an example, the model will not train.
+# if __name__ == '__main__':
+    # # Example Usage - Just an example, the model will not train.
 
-    # Initialize the model
-    model = WSDClassifier()
-    # Train the model
-    model.train_model(train_loader, valid_loader, test_loader, DEVICE)
+    # # Initialize the model
+    # model = WSDClassifier()
+    # # Train the model
+    # model.train_model(train_loader, valid_loader, test_loader, DEVICE)
