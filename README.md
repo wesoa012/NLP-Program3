@@ -162,3 +162,11 @@ As previously mentioned, the `test` split allowed us to test the performance of 
 | thorn-net      | 98%         |
 
 **NOTE:** The performance might differ on your machine since you're training your own network from sratch.
+
+
+
+## Final Project
+
+The extension files have been added to the repository. You should follow the above instructions before running the final 3 files.
+
+When ready please run the `getConvictionEmbeddings.py`, `getRubbishEmbeddings.py`, and `getThornEmbeddings.py` files. This will output graphs for each to show clustering as well as the distributions of the cosine similarities.
